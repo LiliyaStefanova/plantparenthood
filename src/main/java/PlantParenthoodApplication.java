@@ -6,8 +6,8 @@ import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.apache.http.client.HttpClient;
 import resources.ExternalConditionsResource;
-import weather.OutsideWeatherProvider;
-import weather.OutsideWeatherServiceClient;
+import client.weather.OutsideWeatherProvider;
+import client.weather.OutsideWeatherServiceClient;
 
 public class PlantParenthoodApplication extends Application<PlantParenthoodConfiguration> {
 
@@ -16,20 +16,20 @@ public class PlantParenthoodApplication extends Application<PlantParenthoodConfi
     }
 
     public void initialize(Bootstrap<PlantParenthoodConfiguration> bootstrap){
-//        bootstrap.addBundle(new SwaggerBundle<PlantParenthoodConfiguration>() {
-//
-//            @Override
-//            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(PlantParenthoodConfiguration configuration){
-//                return configuration.swaggerBundleConfiguration;
-//            }
-//        });
+        bootstrap.addBundle(new SwaggerBundle<PlantParenthoodConfiguration>() {
+
+            @Override
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(PlantParenthoodConfiguration configuration){
+                return configuration.swaggerBundleConfiguration;
+            }
+        });
     }
 
     @Override
     public void run(PlantParenthoodConfiguration configuration, Environment environment){
         final HttpClient httpClient = new HttpClientBuilder(environment).using(configuration.getHttpClientConfiguration())
                                                                         .build(getName());
-        OutsideWeatherServiceClient outsideWeatherServiceClient = new OutsideWeatherServiceClient(httpClient);
+        OutsideWeatherServiceClient outsideWeatherServiceClient = new OutsideWeatherServiceClient(httpClient, configuration.getWeatherConfig());
         environment.jersey().register(outsideWeatherServiceClient);
         final OutsideWeatherProvider outsideWeatherProvider  = new OutsideWeatherProvider(outsideWeatherServiceClient);
         environment.jersey().register(outsideWeatherProvider);

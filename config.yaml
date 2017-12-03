@@ -1,0 +1,30 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+#    - type: https
+#      port: 8443
+  adminConnectors:
+    - type: http
+      port: 8081
+#    - type: https
+#      port: 8443
+#      keyStorePath: example.keystore
+#      keyStorePassword: example
+httpClient:
+  timeout: 500ms
+  connectionTimeout: 500ms
+  timeToLive: 1h
+  cookiesEnabled: false
+  maxConnections: 1024
+  maxConnectionsPerRoute: 1024
+  keepAlive: 0ms
+  retries: 0
+logging:
+  level: INFO
+#TODO sort out the configuration
+weather:
+  apiUrl: https://api.worldweatheronline.com/premium/v1/weather.ashx
+  apiKey: 77acf52cbcf54393b1b222547172811 # expires on 27 Jan 2018
+swagger:
+  resourcePackage: resources

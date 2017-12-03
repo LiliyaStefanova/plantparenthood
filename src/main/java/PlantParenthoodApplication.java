@@ -20,7 +20,7 @@ public class PlantParenthoodApplication extends Application<PlantParenthoodConfi
 
             @Override
             protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(PlantParenthoodConfiguration configuration){
-                return configuration.swaggerBundleConfiguration;
+                return configuration.getSwaggerBundleConfiguration();
             }
         });
     }

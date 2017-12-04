@@ -19,7 +19,7 @@
               <transformers>
                 <transformer />
                 <transformer>
-                  <mainClass>PlantParenthoodApplication</mainClass>
+                  <mainClass>plantparent.PlantParenthoodApplication</mainClass>
                 </transformer>
               </transformers>
             </configuration>

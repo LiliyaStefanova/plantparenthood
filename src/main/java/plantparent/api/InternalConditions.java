@@ -1,4 +1,4 @@
-package model;
+package plantparent.api;
 
 public class InternalConditions {
 }

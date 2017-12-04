@@ -26,5 +26,6 @@ logging:
 weather:
   apiUrl: https://api.worldweatheronline.com/premium/v1/weather.ashx
   apiKey: ?key=77acf52cbcf54393b1b222547172811 # expires on 27 Jan 2018
+  apiResponseFormat: json
 swagger:
-  resourcePackage: resources
+  resourcePackage: plantparent.resources

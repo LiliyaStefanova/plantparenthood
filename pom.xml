@@ -28,6 +28,11 @@
             <artifactId>dropwizard-swagger</artifactId>
             <version>1.2.2-1</version>
         </dependency>
+        <dependency>
+            <groupId>ru.vyarus</groupId>
+            <artifactId>dropwizard-guicey</artifactId>
+            <version>4.1.0</version>
+        </dependency>
     </dependencies>
     <build>
         <!-- Build a fat jar with all required dependencies-->
@@ -61,7 +66,7 @@
                                         implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>PlantParenthoodApplication</mainClass>
+                                    <mainClass>plantparent.PlantParenthoodApplication</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

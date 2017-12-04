@@ -1,13 +1,11 @@
+package plantparent;
+
 import io.dropwizard.Application;
-import io.dropwizard.client.HttpClientBuilder;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
-import org.apache.http.client.HttpClient;
-import resources.ExternalConditionsResource;
-import client.weather.OutsideWeatherProvider;
-import client.weather.OutsideWeatherServiceClient;
+import ru.vyarus.dropwizard.guice.GuiceBundle;
 
 public class PlantParenthoodApplication extends Application<PlantParenthoodConfiguration> {
 
@@ -16,6 +14,14 @@ public class PlantParenthoodApplication extends Application<PlantParenthoodConfi
     }
 
     public void initialize(Bootstrap<PlantParenthoodConfiguration> bootstrap){
+        //Enable auto config searches for extensions in application package and subpackages
+        //To declare multiple packages for classpath scan, specify them explicitly
+        bootstrap.addBundle(GuiceBundle.builder()
+                            .modules(new PlantParenthoodModule(), new DropwizardModule())
+                            .enableAutoConfig(getClass().getPackage().getName())
+                            .build());
+        super.initialize(bootstrap);
+
         bootstrap.addBundle(new SwaggerBundle<PlantParenthoodConfiguration>() {
 
             @Override
@@ -23,18 +29,11 @@ public class PlantParenthoodApplication extends Application<PlantParenthoodConfi
                 return configuration.getSwaggerBundleConfiguration();
             }
         });
+
     }
 
     @Override
     public void run(PlantParenthoodConfiguration configuration, Environment environment){
-        final HttpClient httpClient = new HttpClientBuilder(environment).using(configuration.getHttpClientConfiguration())
-                                                                        .build(getName());
-        OutsideWeatherServiceClient outsideWeatherServiceClient = new OutsideWeatherServiceClient(httpClient, configuration.getWeatherConfig());
-        environment.jersey().register(outsideWeatherServiceClient);
-        final OutsideWeatherProvider outsideWeatherProvider  = new OutsideWeatherProvider(outsideWeatherServiceClient);
-        environment.jersey().register(outsideWeatherProvider);
-        final ExternalConditionsResource externalConditionsResource = new ExternalConditionsResource(outsideWeatherProvider);
-        environment.jersey().register(externalConditionsResource);
 
     }
 

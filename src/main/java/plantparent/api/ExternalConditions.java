@@ -1,4 +1,4 @@
-package model;
+package plantparent.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
@@ -21,6 +21,17 @@ public class ExternalConditions {
 
     public ExternalConditions(){
 
+    }
+
+    public ExternalConditions(DateTime observationTime, String temperatureC, String windSpeedKmph, String precipMills,
+                              String humidity, String pressure, String weatherIconUrl){
+        this.observationTime = observationTime;
+        this.temperatureC = temperatureC;
+        this.windSpeedKmph = windSpeedKmph;
+        this.precipMills  = precipMills;
+        this.humidity = humidity;
+        this.pressure = pressure;
+        this.weatherIconUrl = weatherIconUrl;
     }
 
     @JsonProperty

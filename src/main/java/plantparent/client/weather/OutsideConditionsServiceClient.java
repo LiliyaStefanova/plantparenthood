@@ -1,6 +1,8 @@
 package plantparent.client.weather;
 
+import java.io.InputStream;
+
 public interface OutsideConditionsServiceClient {
 
-    String getCurrentOutsideConditions(String location);
+    InputStream getCurrentOutsideConditions(String location);
 }

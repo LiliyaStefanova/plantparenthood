@@ -2,7 +2,6 @@ package plantparent.client.weather;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -12,8 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-
-import static plantparent.client.weather.ConditionsModule.OutsideConditionsApiClient;
+import java.io.InputStream;
 
 public class OutsideConditionsServiceClientImpl implements OutsideConditionsServiceClient {
 
@@ -28,12 +26,12 @@ public class OutsideConditionsServiceClientImpl implements OutsideConditionsServ
      * hard code location for the time being
      */
     @Inject
-    public OutsideConditionsServiceClientImpl(@Named(OutsideConditionsApiClient)HttpClient httpClient, OutsideConditionsConfiguration configuration){
+    public OutsideConditionsServiceClientImpl(@Named("HttpClientForWow") HttpClient httpClient, OutsideConditionsConfiguration configuration){
         this.httpClient = httpClient;
         this.configuration = configuration;
     }
 
-    public String getCurrentOutsideConditions(String location){
+    public InputStream getCurrentOutsideConditions(String location){
 
         try{
         String url = this.configuration.getApiUrl();
@@ -51,16 +49,15 @@ public class OutsideConditionsServiceClientImpl implements OutsideConditionsServ
         }
             HttpEntity httpEntity = response.getEntity();
             LOG.info("The entity returned looks like: "+EntityUtils.toString(httpEntity));
-            return EntityUtils.toString(httpEntity);
-
+            return httpEntity.getContent();
         }
         catch(IOException ex){
             //FIXME
             ex.printStackTrace();
         }
 
-        return StringUtils.EMPTY;
-
+        //FIXME
+        return null;
     }
 
 }

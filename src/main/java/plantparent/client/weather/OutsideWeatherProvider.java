@@ -43,7 +43,6 @@ public class OutsideWeatherProvider {
             JsonNode node = mapper.readTree(apiOutput);
             JsonNode currentConditions = node.path("data").get("current_condition").get(0);
             LOG.info("The data node: "+ currentConditions.toString());
-            //TODO - the service returns seemingly rubbish - temp_C is 20 in London...Why?
             return mapper.treeToValue(currentConditions, ExternalConditions.class);
         }
         catch(IOException ex){

@@ -1,11 +1,15 @@
 package plantparent.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
 import org.joda.time.DateTime;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExternalConditions {
 
-    private DateTime observationTime;
+    private String observationTime;
 
     private String temperatureC;
 
@@ -13,9 +17,9 @@ public class ExternalConditions {
 
     private String weatherCode;
 
-    private String [] weatherIconUrl;
+    private List<Object> weatherIconUrl = new ArrayList<Object>();
 
-    private String [] weatherDesc;
+    private List<Object> weatherDesc = new ArrayList<Object>();
 
     private String windspeedMiles;
 
@@ -37,9 +41,9 @@ public class ExternalConditions {
 
     private String feelsLikeC;
 
-    private String FeelsLikeF;
+    private String feelsLikeF;
 
-    public ExternalConditions(DateTime observationTime, String temperatureC, String temperatureF, String weatherCode, String[] weatherIconUrl, String[] weatherDesc, String windspeedMiles, String windspeedKmph, String winddirDegree, String winddir16Point, String precipMM, String humidity, String visibility, String pressure, String cloudcover, String feelsLikeC, String feelsLikeF) {
+    public ExternalConditions(String observationTime, String temperatureC, String temperatureF, String weatherCode, List<Object> weatherIconUrl, List<Object> weatherDesc, String windspeedMiles, String windspeedKmph, String winddirDegree, String winddir16Point, String precipMM, String humidity, String visibility, String pressure, String cloudcover, String feelsLikeC, String feelsLikeF) {
         this.observationTime = observationTime;
         this.temperatureC = temperatureC;
         this.temperatureF = temperatureF;
@@ -56,13 +60,13 @@ public class ExternalConditions {
         this.pressure = pressure;
         this.cloudcover = cloudcover;
         this.feelsLikeC = feelsLikeC;
-        FeelsLikeF = feelsLikeF;
+        this.feelsLikeF = feelsLikeF;
     }
 
     public ExternalConditions(){}
 
     @JsonProperty("observation_time")
-    public DateTime getObservationTime() {
+    public String getObservationTime() {
         return observationTime;
     }
 
@@ -82,12 +86,12 @@ public class ExternalConditions {
     }
 
     @JsonProperty
-    public String[] getWeatherIconUrl() {
+    public List<Object> getWeatherIconUrl() {
         return weatherIconUrl;
     }
 
     @JsonProperty
-    public String[] getWeatherDesc() {
+    public List<Object> getWeatherDesc() {
         return weatherDesc;
     }
 
@@ -143,6 +147,6 @@ public class ExternalConditions {
 
     @JsonProperty("FeelsLikeF")
     public String getFeelsLikeF() {
-        return FeelsLikeF;
+        return feelsLikeF;
     }
 }

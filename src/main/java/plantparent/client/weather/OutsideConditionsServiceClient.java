@@ -1,8 +1,9 @@
 package plantparent.client.weather;
 
-import java.io.InputStream;
+
+import plantparent.core.utils.exceptions.PlantParenthoodServiceException;
 
 public interface OutsideConditionsServiceClient {
 
-    InputStream getCurrentOutsideConditions(String location);
+    String getCurrentOutsideConditions(String location) throws PlantParenthoodServiceException;
 }

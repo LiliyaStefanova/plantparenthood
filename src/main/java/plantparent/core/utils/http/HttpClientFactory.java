@@ -1,4 +1,4 @@
-package plantparent.core.http.utils;
+package plantparent.core.utils.http;
 
 import com.google.inject.Inject;
 import io.dropwizard.client.HttpClientBuilder;

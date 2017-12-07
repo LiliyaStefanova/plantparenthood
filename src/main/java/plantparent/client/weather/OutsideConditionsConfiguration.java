@@ -14,6 +14,9 @@ public class OutsideConditionsConfiguration {
     @NotEmpty
     private String apiResponseFormat;
 
+    @NotEmpty
+    private String numDays;
+
     @JsonProperty
     public String getApiUrl(){
         return apiUrl;
@@ -44,7 +47,15 @@ public class OutsideConditionsConfiguration {
         this.apiResponseFormat = apiResponseFormat;
     }
 
+    @JsonProperty
+    public String getNumDays(){
+        return numDays;
+    }
 
+    @JsonProperty
+    public void setNumDays(String numDays){
+        this.numDays = numDays;
+    }
 
 
 }

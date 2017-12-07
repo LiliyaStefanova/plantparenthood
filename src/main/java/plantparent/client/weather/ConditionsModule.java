@@ -6,7 +6,7 @@ import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import org.apache.http.client.HttpClient;
 import plantparent.PlantParenthoodConfiguration;
-import plantparent.core.http.utils.HttpClientFactory;
+import plantparent.core.utils.http.HttpClientFactory;
 
 public class ConditionsModule extends AbstractModule {
 

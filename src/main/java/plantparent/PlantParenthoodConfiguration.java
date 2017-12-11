@@ -3,10 +3,12 @@ package plantparent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 import io.dropwizard.client.HttpClientConfiguration;
+import io.dropwizard.db.DataSourceFactory;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import plantparent.client.weather.OutsideConditionsConfiguration;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 public class PlantParenthoodConfiguration extends Configuration {
 
@@ -19,6 +21,10 @@ public class PlantParenthoodConfiguration extends Configuration {
 
     @Valid
     private OutsideConditionsConfiguration weatherConfig = new OutsideConditionsConfiguration();
+
+    @Valid
+    @NotNull
+    private DataSourceFactory database = new DataSourceFactory();
 
     @JsonProperty
     public SwaggerBundleConfiguration getSwaggerBundleConfiguration() {
@@ -43,6 +49,16 @@ public class PlantParenthoodConfiguration extends Configuration {
     @JsonProperty("weather")
     public void setWeatherConfig(OutsideConditionsConfiguration weatherConfig){
         this.weatherConfig = weatherConfig;
+    }
+
+    @JsonProperty("database")
+    public DataSourceFactory getDatabaseSourceFactory(){
+        return database;
+    }
+
+    @JsonProperty("database")
+    public void setDatabaseSourceFactory(DataSourceFactory configuration){
+        this.database = configuration;
     }
 
 }

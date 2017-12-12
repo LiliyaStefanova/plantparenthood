@@ -7,14 +7,14 @@ import plantparent.jdbi.dao.PlantDao;
 
 public class PlantProvider {
 
-    private final DBI dbConn;
+    private final DBI database;
 
     @Inject
     public PlantProvider(@Named("postgresql") DBI dbConn){
-        this.dbConn = dbConn;
+        this.database = dbConn;
     }
 
     public PlantDao getPlantDao(){
-        return dbConn.onDemand(PlantDao.class);
+        return database.onDemand(PlantDao.class);
     }
 }

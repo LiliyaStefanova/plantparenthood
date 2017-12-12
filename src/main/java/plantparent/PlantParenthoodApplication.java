@@ -1,6 +1,7 @@
 package plantparent;
 
 import io.dropwizard.Application;
+import io.dropwizard.jdbi.bundles.DBIExceptionsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
@@ -29,6 +30,7 @@ public class PlantParenthoodApplication extends Application<PlantParenthoodConfi
                 return configuration.getSwaggerBundleConfiguration();
             }
         });
+        bootstrap.addBundle(new DBIExceptionsBundle());
 
     }
 
